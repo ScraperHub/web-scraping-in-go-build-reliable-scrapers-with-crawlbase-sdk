@@ -1,3 +1,11 @@
+<a href="https://crawlbase.com/signup?utm_source=github&utm_medium=readme&utm_campaign=crawling_api_banner" target="_blank">
+  <img src="https://github.com/user-attachments/assets/afa4f6e7-25fb-442c-af2f-b4ddcfd62ab2" 
+       alt="crawling-api-cta" 
+       style="max-width: 100%; border: 0;">
+</a>
+
+
+
 # Web Scraping in Go with Crawlbase
 
 Runnable examples for the blog post **Web Scraping in Go: Build Reliable Scrapers with Crawlbase SDK**. Each command under `cmd/` maps to one section of the article.
