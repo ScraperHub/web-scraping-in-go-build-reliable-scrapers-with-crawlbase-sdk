@@ -56,7 +56,7 @@ export CRAWLBASE_JS_TOKEN="YOUR_JAVASCRIPT_TOKEN"
 | `go run ./cmd/jsrender` | JS rendering with `ajax_wait` on Amazon |
 | `go run ./cmd/scraper` | Built-in `amazon-product-details` scraper |
 | `go run ./cmd/amazon` | Geo + scraper + promote to JS on 520/525 |
-| `go run ./cmd/retry` | Backoff until `StatusCode` and `PCStatus` are 200 |
+| `go run ./cmd/retry` | Backoff until `StatusCode` and `CBStatus` are 200 |
 
 Amazon product URL used in examples:
 
@@ -67,28 +67,28 @@ Amazon product URL used in examples:
 Crawlbase returns three signals on every response:
 
 1. **`StatusCode`** — HTTP status of your request to Crawlbase (`200` means Crawlbase processed the call).
-2. **`PCStatus`** — Crawlbase’s verdict on the target page (`200` means a clean fetch).
+2. **`CBStatus`** — Crawlbase’s verdict on the target page (`200` means a clean fetch).
 3. **`OriginalStatus`** — HTTP status the target site returned (e.g. `404` on a missing page).
 
-Always check `StatusCode` first, then `PCStatus`, then `OriginalStatus` for site-side errors. See the [status codes docs](https://crawlbase.com/docs/status-codes) and [Crawling API](https://crawlbase.com/docs/crawling-api).
+Always check `StatusCode` first, then `CBStatus`, then `OriginalStatus` for site-side errors. See the [status codes docs](https://crawlbase.com/docs/status-codes) and [Crawling API](https://crawlbase.com/docs/crawling-api).
 
 Helper functions live in `internal/crawl`:
 
-- `IsCrawlSuccess(res)` — `StatusCode == 200 && PCStatus == 200`
+- `IsCrawlSuccess(res)` — `StatusCode == 200 && CBStatus == 200`
 - `PrintLayers(label, res)` — prints all three layers for debugging
 
 ## Troubleshooting
 
 | Symptom | Likely cause | What to try |
 |---------|--------------|-------------|
-| `StatusCode 200` but empty or wrong body | Only checked HTTP status | Check `PCStatus` and `OriginalStatus` |
-| `PCStatus 404` | Target page missing | Fix URL or ASIN |
-| `PCStatus 520` or `525` | Empty body or unsolved bot challenge | JavaScript token, `ajax_wait`, or `page_wait` |
+| `StatusCode 200` but empty or wrong body | Only checked HTTP status | Check `CBStatus` and `OriginalStatus` |
+| `CBStatus 404` | Target page missing | Fix URL or ASIN |
+| `CBStatus 520` or `525` | Empty body or unsolved bot challenge | JavaScript token, `ajax_wait`, or `page_wait` |
 | `StatusCode 403` | JS-only option on Normal token | Use the JavaScript token |
 | `StatusCode 429` | Concurrency limit | Back off and retry |
 | `StatusCode 401` or `402` | Invalid token or no credits | Verify token and account balance |
 
-Failed crawls (`PCStatus != 200`) do not count against your quota; retries are free until you get a successful `PCStatus`.
+Failed crawls (`CBStatus != 200`) do not count against your quota; retries are free until you get a successful `CBStatus`.
 
 ## Alternatives
 

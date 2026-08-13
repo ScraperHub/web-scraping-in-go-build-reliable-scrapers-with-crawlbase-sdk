@@ -26,7 +26,7 @@ func main() {
 
 	crawl.PrintLayers("amazon-product-details scraper", res)
 	if !crawl.IsCrawlSuccess(res) {
-		fmt.Println("Scraper call failed — check PCStatus; retry with JS token if 520/525.")
+		fmt.Println("Scraper call failed — check CBStatus; retry with JS token if 520/525.")
 		os.Exit(1)
 	}
 

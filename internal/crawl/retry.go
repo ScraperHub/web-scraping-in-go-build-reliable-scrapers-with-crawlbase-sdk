@@ -35,5 +35,5 @@ func GetWithBackoff(get Getter, attempts int) (*crawlbase.Response, error) {
 	if last == nil {
 		return nil, fmt.Errorf("crawl failed after %d attempts", attempts)
 	}
-	return last, fmt.Errorf("crawl failed: status=%d pc_status=%d", last.StatusCode, last.PCStatus)
+	return last, fmt.Errorf("crawl failed: status=%d cb_status=%d", last.StatusCode, last.CBStatus)
 }

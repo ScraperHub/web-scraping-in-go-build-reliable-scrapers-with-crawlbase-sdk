@@ -22,7 +22,7 @@ func main() {
 		"ajax_wait": "true",
 	}
 
-	fmt.Println("Retry with backoff (requires StatusCode 200 and PCStatus 200)")
+	fmt.Println("Retry with backoff (requires StatusCode 200 and CBStatus 200)")
 	res, err := crawl.GetWithBackoff(func() (*crawlbase.Response, error) {
 		return api.Get(url, opts)
 	}, 3)

@@ -32,7 +32,7 @@ func main() {
 		return
 	}
 
-	if res.PCStatus == 520 || res.PCStatus == 525 {
+	if res.CBStatus == 520 || res.CBStatus == 525 {
 		fmt.Println("\nPromoting to JavaScript token with ajax_wait...")
 		jsOpts := map[string]string{
 			"scraper":   "amazon-product-details",

@@ -25,6 +25,6 @@ func main() {
 		fmt.Printf("Body length: %d bytes\n", len(res.Body))
 		os.Exit(0)
 	}
-	fmt.Println("Crawl did not succeed — check PCStatus above.")
+	fmt.Println("Crawl did not succeed — check CBStatus above.")
 	os.Exit(1)
 }

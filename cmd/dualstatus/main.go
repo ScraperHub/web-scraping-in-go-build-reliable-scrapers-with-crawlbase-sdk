@@ -29,7 +29,7 @@ func main() {
 	crawl.PrintLayers("httpbin 404", res404)
 	warnLayers(res404)
 
-	fmt.Println("\nCase 2: invalid Amazon ASIN — expect PCStatus 404")
+	fmt.Println("\nCase 2: invalid Amazon ASIN — expect CBStatus 404")
 	resBad, err := api.Get(invalidAmazonURL, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -52,10 +52,10 @@ func main() {
 		}
 	}
 	if demonstrated {
-		fmt.Println("\nDemonstrated: StatusCode 200 does not mean a usable page — check PCStatus and OriginalStatus.")
+		fmt.Println("\nDemonstrated: StatusCode 200 does not mean a usable page — check CBStatus and OriginalStatus.")
 		os.Exit(0)
 	}
-	fmt.Println("\nAll three returned clean PCStatus — layers were still printed for inspection.")
+	fmt.Println("\nAll three returned clean CBStatus — layers were still printed for inspection.")
 }
 
 func warnLayers(res *crawlbase.Response) {
@@ -63,9 +63,9 @@ func warnLayers(res *crawlbase.Response) {
 		return
 	}
 	if !crawl.IsCrawlSuccess(res) {
-		fmt.Println("WARNING: StatusCode 200 but PCStatus != 200 — naive check would hide the failure.")
+		fmt.Println("WARNING: StatusCode 200 but CBStatus != 200 — naive check would hide the failure.")
 	}
 	if res.OriginalStatus >= 400 {
-		fmt.Println("WARNING: StatusCode and PCStatus are 200, but OriginalStatus shows a site-side error.")
+		fmt.Println("WARNING: StatusCode and CBStatus are 200, but OriginalStatus shows a site-side error.")
 	}
 }
